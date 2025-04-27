@@ -19,7 +19,7 @@ class VideoDownloader: NSObject, URLSessionDownloadDelegate {
     
     override init() {
         super.init()
-        let configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.background(withIdentifier: "com.rakhi.\(UUID().uuidString)")
         urlSession = URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.main)
     }
     
