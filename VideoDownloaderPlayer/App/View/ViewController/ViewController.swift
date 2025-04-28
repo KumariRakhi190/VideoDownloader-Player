@@ -55,6 +55,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         cell.downloadButton.addTarget(self, action: #selector(didTapDownload), for: .touchUpInside)
         cell.playButton.tag = indexPath.row
         cell.playButton.addTarget(self, action: #selector(didTapPlayVideo), for: .touchUpInside)
+//        cell.onPauseButtonTapped = { [weak self] in
+//            guard let self else { return }
+//            self.viewModel.pauseDownload(video: videos[indexPath.row])
+//        }
+        
+        // In ViewController where the cell is being configured:
+
+        cell.onPauseButtonTapped = { [weak self] in
+            guard let self else { return }
+            if let video = cell.video {
+                // Check if the video is paused
+                if video.isPaused {
+                    self.viewModel.resumeDownload(video: video)  // Resume the download
+                } else {
+                    self.viewModel.pauseDownload(video: video)  // Pause the download
+                }
+            }
+        }
+
+
         return cell
     }
     

@@ -16,6 +16,8 @@ class Video {
     @Published var downloadedUrl: URL?
     @Published var isDownloading: Bool = false
     @Published var error: Error?
+    @Published var isPaused: Bool = false
+    var downloader: VideoDownloader?
     
     init(url: URL) {
         self.url = url

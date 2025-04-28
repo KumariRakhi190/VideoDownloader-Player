@@ -15,9 +15,11 @@ class VideoTableViewCell: UITableViewCell {
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var downloadPercentageLabel: UILabel!
+    @IBOutlet weak var pauseButtonOutlet: UIButton!
     
     var cancellables: Set<AnyCancellable> = []
-    
+    var onPauseButtonTapped: (() -> Void)?
+
     var video: Video?{
         didSet{
             linkLabel.text = video?.url.absoluteString
@@ -61,22 +63,47 @@ class VideoTableViewCell: UITableViewCell {
                 }
             }).store(in: &cancellables)
             
-            video?.$isDownloading.sink(receiveValue: { [weak self] isDownloading in
-                guard let self else {return}
-                if isDownloading == true{
-                    downloadButton.isEnabled = false
-                }
-                else{
-                    downloadButton.isEnabled = true
+            video?.$isPaused.sink(receiveValue: { [weak self] isPaused in
+                guard let self else { return }
+                if isPaused {
+                    pauseButtonOutlet.setImage(UIImage(systemName: "restart.circle"), for: .normal) // Resume icon
+                } else {
+                    pauseButtonOutlet.setImage(UIImage(systemName: "pause.circle"), for: .normal) // Pause icon
                 }
             }).store(in: &cancellables)
+
+            
+//            video?.$isDownloading.sink(receiveValue: { [weak self] isDownloading in
+//                guard let self else {return}
+//                if isDownloading == true{
+//                    downloadButton.isEnabled = false
+//                }
+//                else{
+//                    downloadButton.isEnabled = true
+//                }
+//            }).store(in: &cancellables)
+            
+            video?.$isDownloading.sink(receiveValue: { [weak self] isDownloading in
+                guard let self else { return }
+                if isDownloading == true {
+                    downloadButton.isEnabled = false
+                    pauseButtonOutlet.isHidden = false  // 👈 SHOW Pause button when downloading
+                } else {
+                    downloadButton.isEnabled = true
+                    pauseButtonOutlet.isHidden = true   // 👈 HIDE Pause button otherwise
+                }
+            }).store(in: &cancellables)
+
             
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        cancellables.removeAll()
+        onPauseButtonTapped = nil
     }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -88,6 +115,11 @@ class VideoTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
+    
+    @IBAction func pauseButtonTapped(_ sender: UIButton) {
+        onPauseButtonTapped?()
+    }
+
     
     
 }

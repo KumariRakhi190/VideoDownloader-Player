@@ -18,8 +18,33 @@ class ViewModel {
         Video(url: URL(string: "https://player.vimeo.com/progressive_redirect/playback/433947577/rendition/1080p/file.mp4?loc=external&signature=946c6b2133120806a0cbaeec334708dda1dd7bb6f399f2e6f14224a61bf164ca")!)
     ]
     
-    func downloadVideo(video: Video){
+    
+
+    
+//    func downloadVideo(video: Video){
+//        let videoDownloader = VideoDownloader()
+//        videoDownloader.downloadVideo(from: video.url) { progress in
+//            video.progress = progress
+//            video.isDownloading = true
+//        } onCompletion: { url in
+//            video.downloadedUrl = url
+//            video.isDownloaded = true
+//            video.isDownloading = false
+//            
+//            var downloadedVideos = UserDefaults.standard.downloadedVideos ?? []
+//            downloadedVideos.append(DownloadedVideo(remoteUrl: video.url, downloadedUrl: url))
+//            UserDefaults.standard.downloadedVideos = downloadedVideos
+//            
+//        } onError: { error in
+//            video.error = error
+//        }
+//        
+//    }
+    
+    func downloadVideo(video: Video) {
         let videoDownloader = VideoDownloader()
+        video.downloader = videoDownloader  // Store downloader inside the video
+        
         videoDownloader.downloadVideo(from: video.url) { progress in
             video.progress = progress
             video.isDownloading = true
@@ -27,6 +52,7 @@ class ViewModel {
             video.downloadedUrl = url
             video.isDownloaded = true
             video.isDownloading = false
+            video.downloader = nil   // ✅ Clear downloader after completion
             
             var downloadedVideos = UserDefaults.standard.downloadedVideos ?? []
             downloadedVideos.append(DownloadedVideo(remoteUrl: video.url, downloadedUrl: url))
@@ -34,9 +60,22 @@ class ViewModel {
             
         } onError: { error in
             video.error = error
+            video.isDownloading = false
+            video.downloader = nil   // ✅ Clear downloader after error
         }
-        
     }
+    
+    func pauseDownload(video: Video) {
+        video.downloader?.pauseDownload()
+        video.isPaused = true
+    }
+
+    func resumeDownload(video: Video) {
+        video.downloader?.resumeDownload()
+        video.isPaused = false
+    }
+
+
     
 }
 

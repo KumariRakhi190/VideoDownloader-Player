@@ -23,22 +23,22 @@
                                 <rect key="frame" x="10" y="10" width="427" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XjD-ad-i3Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="236" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-zT-6MS">
-                                                <rect key="frame" x="0.0" y="0.0" width="296" height="30.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="236" height="30.666666666666668"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4Yp-SO-HM7">
-                                                <rect key="frame" x="0.0" y="35.666666666666664" width="296" height="14.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="35.666666666666664" width="236" height="14.333333333333336"/>
                                                 <subviews>
                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YTg-lw-CJl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="272.33333333333331" height="14.333333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="212.33333333333334" height="14.333333333333334"/>
                                                     </progressView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QpT-d4-bSF">
-                                                        <rect key="frame" x="277.33333333333331" y="0.0" width="18.666666666666686" height="14.333333333333334"/>
+                                                        <rect key="frame" x="217.33333333333334" y="0.0" width="18.666666666666657" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -48,14 +48,14 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7A-ct-Mhd">
-                                        <rect key="frame" x="306" y="0.0" width="1" height="50"/>
+                                        <rect key="frame" x="246" y="0.0" width="1" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="1FU-tx-5OZ"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jBe-44-wMQ">
-                                        <rect key="frame" x="317" y="0.0" width="110" height="50"/>
+                                        <rect key="frame" x="257" y="0.0" width="170" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4c6-LH-5aJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -66,8 +66,16 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" image="arrow.down.circle" catalog="system"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jix-WO-Muw">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vc-lw-QSD">
                                                 <rect key="frame" x="60" y="0.0" width="50" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="tinted" image="restart.circle" catalog="system"/>
+                                                <connections>
+                                                    <action selector="pauseButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="guN-Lr-wIX"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jix-WO-Muw">
+                                                <rect key="frame" x="120" y="0.0" width="50" height="50"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" image="play.circle" catalog="system"/>
                                             </button>
@@ -103,6 +111,7 @@
                 <outlet property="downloadPercentageLabel" destination="QpT-d4-bSF" id="10D-BK-Z6m"/>
                 <outlet property="downloadProgressView" destination="YTg-lw-CJl" id="7Vl-1C-u91"/>
                 <outlet property="linkLabel" destination="BTG-zT-6MS" id="P8J-FN-U8N"/>
+                <outlet property="pauseButtonOutlet" destination="9vc-lw-QSD" id="65U-rv-gYZ"/>
                 <outlet property="playButton" destination="Jix-WO-Muw" id="0jq-gi-5jY"/>
             </connections>
             <point key="canvasLocation" x="-96.946564885496173" y="91.549295774647888"/>
@@ -111,6 +120,7 @@
     <resources>
         <image name="arrow.down.circle" catalog="system" width="128" height="123"/>
         <image name="play.circle" catalog="system" width="128" height="123"/>
+        <image name="restart.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
